@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>點擊計數網格</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            gap: 2px;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            user-select: none;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="grid"></div>
+    <button id="reset">重置所有格子</button>
+
+    <script>
+        const grid = document.getElementById("grid");
+        const resetButton = document.getElementById("reset");
+        const rows = 4, cols = 5; // 4x5 網格
+
+        for (let i = 0; i < rows * cols; i++) {
+            let cell = document.createElement("div");
+            cell.classList.add("cell");
+            cell.textContent = "0";
+
+            // 左鍵點擊 +1
+            cell.addEventListener("click", () => {
+                cell.textContent = parseInt(cell.textContent) + 1;
+            });
+
+            // 右鍵點擊 -1
+            cell.addEventListener("contextmenu", (event) => {
+                event.preventDefault();
+                let value = parseInt(cell.textContent);
+                cell.textContent = value > 0 ? value - 1 : 0;
+            });
+
+            grid.appendChild(cell);
+        }
+
+        // 重置按鈕
+        resetButton.addEventListener("click", () => {
+            document.querySelectorAll(".cell").forEach(cell => {
+                cell.textContent = "0";
+            });
+        });
+    </script>
+</body>
+</html>
