@@ -13,7 +13,7 @@
         }
         #grid {
             display: grid;
-            grid-template-columns: repeat(5, 50px);
+            grid-template-columns: repeat(8, 50px);
             gap: 2px;
         }
         .cell {
@@ -42,7 +42,7 @@
     <script>
         const grid = document.getElementById("grid");
         const resetButton = document.getElementById("reset");
-        const rows = 4, cols = 5; // 4x5 網格
+        const rows = 8, cols = 8; // 8x8 網格
 
         for (let i = 0; i < rows * cols; i++) {
             let cell = document.createElement("div");
